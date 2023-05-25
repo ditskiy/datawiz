@@ -6,12 +6,12 @@
 
 
 {% block content %}
-<div class="m-4">
-  <div class="mt-4 p-5 bg-secondary text-white rounded">
+<section class="m-4">
+  <header class="mt-4 p-5 bg-secondary text-white rounded">
     <h1 class="display-4">Hello, world!</h1>
     <p class="lead">This is a my super blog about something.</p>
-  </div>
-  <div class="row">
+  </header>
+  <main class="row">
     {% for post in post_list %}
     <div class="post-item col-12 col-md-6 p-2">
       <div class="card h-100">
@@ -26,6 +26,6 @@
     </div>
 
     {% endfor %}
-  </div>
-</div>
+  </main>
+</section>
 {% endblock content %}

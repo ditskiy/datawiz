@@ -18,6 +18,22 @@
     </div>
   </div>
   {% include 'components/comments.html' %}
+  <div class="row">
+    {% for post in last_articles %}
+    <div class="post-item col-12 col-md-6 p-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="text-secondary">{{ post.created|date:"d.m.Y" }} by {{ post.author }}</p>
+          <p class="card-text">{{post.body|safe|truncatewords_html:15 }}</p>
+          {% like_btn %}
+          <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>>
+</div>
   <!-- render last_articles here -->
 
 </div>
