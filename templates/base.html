@@ -41,28 +41,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+   
+    {% block "script" %}
+    {% if request.path == "/" %}
     <script >
-
         TweenLite.fromTo(".line", 3, {drawSVG:"0"}, { drawSVG:"100%", delay: 0.5})
-        
-
+      
         const paths = document.querySelectorAll(".content_block-image svg path");
-
+      
         paths.forEach(path => {
             path.addEventListener('mouseenter', () => {
             gsap.to(path, { duration: 0.3, y: -10, x: -10, scaleX: 1.2});
             });
-
+      
             path.addEventListener('mouseleave', () => {
             gsap.to(path, { duration: 0.3, y: 0, x: 0, scaleX: 1});
             });
         })
-
+      
        
         const container = document.querySelector('body');
         container.style.overflowX = 'hidden';
-
-
+      
+      
         // Функции для запуска таймлайна
         function playTimeline() {
         const tl = gsap.timeline();
@@ -87,12 +88,10 @@
             const options = {
         threshold: 0.01 // Пороговое значение для определения видимости элемента
         };
-
+      
         const observer1 = new IntersectionObserver((entries, observer) => {
-            console.log(entries)
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("block1")
                 playTimeline();
             observer.unobserve(entry.target);
             }
@@ -100,12 +99,11 @@
         }, options);
         const myElement = document.querySelector(".image-1");
         observer1.observe(myElement);
-
+      
         // Создание Intersection Observer для второго элемента
         const observer2 = new IntersectionObserver((entries, observer) => {
         entries.forEach( entry => {
             if (entry.isIntersecting) {
-                console.log("block2");
                 playTimeline2();
             observer.unobserve(entry.target);
             }
@@ -113,12 +111,11 @@
         }, options);
         const myElement2 = document.querySelector(".image-2");
         observer2.observe(myElement2);
-
+      
         // Создание Intersection Observer для третьего элемента
         const observer3 = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("block3");
                 playTimeline3();
             observer.unobserve(entry.target);
             }
@@ -126,12 +123,11 @@
         }, options);
         const myElement3 = document.querySelector(".image-3");
         observer3.observe(myElement3);
-
+      
         // Создание Intersection Observer для четвертого элемента
         const observer4 = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("block4");
                 playTimeline4();
             observer.unobserve(entry.target);
             }
@@ -139,9 +135,10 @@
         }, options);
         const myElement4 = document.querySelector(".image-4");
         observer4.observe(myElement4);
-
-    </script>
-    {% block "script" %}{% endblock %}
+      
+      </script>
+  {% endif %}
+    {% endblock %}
 </body>
 
 </html>
